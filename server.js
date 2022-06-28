@@ -1,8 +1,9 @@
 const express = require('express')
 const dotenv = require("dotenv").config()
 
-const notFoundMiddleware = require('./middlewares/not-found')
 const connectDB = require('./db/connect')
+const notFoundMiddleware = require('./middlewares/notFoundMiddleware')
+const errorHandler = require('./middlewares/errorsMiddleware')
 const userRouter = require('./routes/userRoutes')
 const courseRouter = require('./routes/courseRoutes')
 
@@ -14,6 +15,8 @@ app.use('/api/user', userRouter)
 app.use('/api/course', courseRouter)
 
 app.use(notFoundMiddleware)
+
+app.use(errorHandler)
 
 const port = process.env.PORT || 5000
 
