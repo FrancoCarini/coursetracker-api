@@ -3,12 +3,13 @@ const dotenv = require("dotenv").config()
 
 const notFoundMiddleware = require('./middlewares/not-found')
 const connectDB = require('./db/connect')
+const userRouter = require('./routes/userRoutes')
 
 const app = express()
 
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Hola' })
-})
+app.use(express.json())
+
+app.use('/api/user', userRouter)
 
 app.use(notFoundMiddleware)
 
