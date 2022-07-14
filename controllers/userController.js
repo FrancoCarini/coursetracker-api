@@ -30,7 +30,22 @@ const login = asyncHandler(async (req, res) => {
   sendTokenResponse(user, 200, res)
 })
 
-const update = asyncHandler(async (req, res) => {})
+const update = asyncHandler(async (req, res) => {
+  const { name } = req.body
+
+  if (!name) {
+    next(new AppError('Please provide all values'), 400)
+  }
+
+  const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+    new: true,
+    runValidators: false,
+  })
+
+  res.status(200).json({
+    user,
+  })
+})
 
 const sendTokenResponse = (user, statusCode, res) => {
   //Create token
