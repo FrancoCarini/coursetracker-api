@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv').config()
 const cors = require('cors')
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 
 const connectDB = require('./db/connect')
 const notFoundMiddleware = require('./middlewares/notFoundMiddleware')
@@ -15,7 +16,11 @@ if (process.env.ENVIRONMENT !== 'production') {
   app.use(morgan('dev'))
 }
 
+// Body parser
 app.use(express.json())
+
+// Cookie Parser
+app.use(cookieParser())
 
 app.use(cors())
 

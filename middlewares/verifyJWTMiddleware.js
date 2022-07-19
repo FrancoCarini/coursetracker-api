@@ -14,7 +14,7 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     req.user = decoded.id
     next()
   } catch (err) {
-    return next(new AppError('Expired Token', 403))
+    return next(new AppError('Expired Token', 401))
   }
 })
 

@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
     minLength: 6,
     select: false,
   },
+  refreshToken: String,
 })
 
 UserSchema.pre('save', async function (next) {
@@ -41,6 +42,12 @@ UserSchema.pre('save', async function (next) {
 UserSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
+  })
+}
+
+UserSchema.methods.getSignedRefreshToken = function () {
+  return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, {
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRE,
   })
 }
 

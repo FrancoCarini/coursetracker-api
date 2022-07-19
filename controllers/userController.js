@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const jwt = require('jsonwebtoken')
 
 const AppError = require('../utils/appError')
 const User = require('../models/User')
@@ -30,14 +31,14 @@ const login = asyncHandler(async (req, res) => {
   sendTokenResponse(user, 200, res)
 })
 
-const update = asyncHandler(async (req, res) => {
+const update = asyncHandler(async (req, res, next) => {
   const { name } = req.body
 
   if (!name) {
     next(new AppError('Please provide all values'), 400)
   }
 
-  const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+  const user = await User.findByIdAndUpdate(req.user, req.body, {
     new: true,
     runValidators: false,
   })
@@ -47,31 +48,57 @@ const update = asyncHandler(async (req, res) => {
   })
 })
 
-const sendTokenResponse = (user, statusCode, res) => {
+const refresh = asyncHandler(async (req, res, next) => {
+  const cookies = req.cookies
+  if (!cookies?.jwt) return next(new AppError('Unauthorized', 401))
+
+  const refreshToken = cookies.jwt
+  const user = await User.findOne({ refreshToken })
+  if (!user) return next(new AppError('Not Allowed', 403))
+
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err || user._id.toString() !== decoded.id) {
+      console.log('entro aca')
+      return next(new AppError('Not Allowed', 403))
+    }
+
+    //Create token
+    const token = user.getSignedRefreshToken()
+
+    res.json({ token })
+  })
+})
+
+const sendTokenResponse = async (user, statusCode, res) => {
   //Create token
   const token = user.getSignedJwtToken()
 
+  // Create Access Token
+  const refreshToken = user.getSignedRefreshToken()
+
+  // Save Refresh Token in DB
+  user.refreshToken = refreshToken
+  await user.save()
+
+  user.refreshToken = undefined
+  user.password = undefined
+
   const cookieOptions = {
     httpOnly: true,
-    maxAge: process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000,
-    sameSite: 'None',
+    maxAge: 24 * 60 * 60,
   }
 
   if (process.env.ENVIRONMENT === 'production') {
     cookieOptions.secure = true
   }
 
-  user.password = undefined
-
-  res.cookie('jwt', token, cookieOptions)
-  res.status(statusCode).json({
-    token,
-    user,
-  })
+  res.cookie('jwt', refreshToken, cookieOptions)
+  res.status(200).json({ token, user })
 }
 
 module.exports = {
   register,
   login,
   update,
+  refresh,
 }
