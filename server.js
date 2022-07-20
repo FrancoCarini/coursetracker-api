@@ -9,6 +9,7 @@ const notFoundMiddleware = require('./middlewares/notFoundMiddleware')
 const errorHandler = require('./middlewares/errorsMiddleware')
 const userRouter = require('./routes/userRoutes')
 const courseRouter = require('./routes/courseRoutes')
+const corsOptions = require('./utils/cors')
 
 const app = express()
 
@@ -22,7 +23,7 @@ app.use(express.json())
 // Cookie Parser
 app.use(cookieParser())
 
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use('/api/users', userRouter)
 app.use('/api/courses', courseRouter)

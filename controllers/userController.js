@@ -62,10 +62,13 @@ const refresh = asyncHandler(async (req, res, next) => {
       return next(new AppError('Not Allowed', 403))
     }
 
+    user.password = undefined
+    user.refreshToken = undefined
+
     //Create token
     const token = user.getSignedRefreshToken()
 
-    res.json({ token })
+    res.json({ token, user })
   })
 })
 
@@ -85,7 +88,7 @@ const sendTokenResponse = async (user, statusCode, res) => {
 
   const cookieOptions = {
     httpOnly: true,
-    maxAge: 24 * 60 * 60,
+    maxAge: 24 * 60 * 60 * 1000,
   }
 
   if (process.env.ENVIRONMENT === 'production') {
