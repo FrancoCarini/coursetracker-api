@@ -58,7 +58,6 @@ const refresh = asyncHandler(async (req, res, next) => {
 
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
     if (err || user._id.toString() !== decoded.id) {
-      console.log('entro aca')
       return next(new AppError('Not Allowed', 403))
     }
 
@@ -66,7 +65,7 @@ const refresh = asyncHandler(async (req, res, next) => {
     user.refreshToken = undefined
 
     //Create token
-    const token = user.getSignedRefreshToken()
+    const token = user.getSignedJwtToken()
 
     res.json({ token, user })
   })
