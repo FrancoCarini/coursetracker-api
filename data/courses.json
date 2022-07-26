@@ -1,0 +1,212 @@
+[
+  {
+    "title": "Tres-Zap",
+    "platform": "Platzi",
+    "url": "http://cnn.com",
+    "topic": "Frontend Programming",
+    "status": "finished"
+  },
+  {
+    "title": "Alphazap",
+    "platform": "Platzi",
+    "url": "https://guardian.co.uk",
+    "topic": "Frontend Programming",
+    "status": "abandoned"
+  },
+  {
+    "title": "Biodex",
+    "platform": "Udemy",
+    "url": "https://imageshack.us",
+    "topic": "GIT",
+    "status": "finished"
+  },
+  {
+    "title": "Regrant",
+    "platform": "Platzi",
+    "url": "http://sourceforge.net",
+    "topic": "HTML",
+    "status": "on going"
+  },
+  {
+    "title": "Daltfresh",
+    "platform": "Platzi",
+    "url": "https://dot.gov",
+    "topic": "HTML",
+    "status": "abandoned"
+  },
+  {
+    "title": "Ronstring",
+    "platform": "Pluralsight",
+    "url": "http://deliciousdays.com",
+    "topic": "Databases",
+    "status": "finished"
+  },
+  {
+    "title": "Greenlam",
+    "platform": "FrontendMasters",
+    "url": "https://sourceforge.net",
+    "topic": "HTML",
+    "status": "abandoned"
+  },
+  {
+    "title": "Zamit",
+    "platform": "Pluralsight",
+    "url": "https://reuters.com",
+    "topic": "Databases",
+    "status": "on going"
+  },
+  {
+    "title": "Latlux",
+    "platform": "Udemy",
+    "url": "https://time.com",
+    "topic": "Databases",
+    "status": "finished"
+  },
+  {
+    "title": "Sub-Ex",
+    "platform": "FrontendMasters",
+    "url": "http://mtv.com",
+    "topic": "GIT",
+    "status": "Not started"
+  },
+  {
+    "title": "Pannier",
+    "platform": "Udemy",
+    "url": "http://google.co.uk",
+    "topic": "Backend Programming",
+    "status": "finished"
+  },
+  {
+    "title": "Gembucket",
+    "platform": "Platzi",
+    "url": "https://51.la",
+    "topic": "Fullstack Programming",
+    "status": "abandoned"
+  },
+  {
+    "title": "Regrant",
+    "platform": "Platzi",
+    "url": "https://ebay.co.uk",
+    "topic": "Backend Programming",
+    "status": "finished"
+  },
+  {
+    "title": "Tin",
+    "platform": "Platzi",
+    "url": "https://wp.com",
+    "topic": "GIT",
+    "status": "finished"
+  },
+  {
+    "title": "Otcom",
+    "platform": "Pluralsight",
+    "url": "http://multiply.com",
+    "topic": "Databases",
+    "status": "on going"
+  },
+  {
+    "title": "Tres-Zap",
+    "platform": "Pluralsight",
+    "url": "https://slideshare.net",
+    "topic": "Fullstack Programming",
+    "status": "Not started"
+  },
+  {
+    "title": "Alpha",
+    "platform": "Platzi",
+    "url": "https://cloudflare.com",
+    "topic": "Frontend Programming",
+    "status": "on going"
+  },
+  {
+    "title": "Subin",
+    "platform": "Pluralsight",
+    "url": "https://example.com",
+    "topic": "GIT",
+    "status": "finished"
+  },
+  {
+    "title": "Tresom",
+    "platform": "Udemy",
+    "url": "http://cdc.gov",
+    "topic": "Fullstack Programming",
+    "status": "on going"
+  },
+  {
+    "title": "Kanlam",
+    "platform": "Pluralsight",
+    "url": "http://blogs.com",
+    "topic": "Backend Programming",
+    "status": "abandoned"
+  },
+  {
+    "title": "Flexidy",
+    "platform": "FrontendMasters",
+    "url": "http://huffingtonpost.com",
+    "topic": "Fullstack Programming",
+    "status": "Not started"
+  },
+  {
+    "title": "Sub-Ex",
+    "platform": "Platzi",
+    "url": "http://t-online.de",
+    "topic": "HTML",
+    "status": "on going"
+  },
+  {
+    "title": "Treeflex",
+    "platform": "FrontendMasters",
+    "url": "http://ow.ly",
+    "topic": "Frontend Programming",
+    "status": "Not started"
+  },
+  {
+    "title": "Namfix",
+    "platform": "Pluralsight",
+    "url": "http://yahoo.co.jp",
+    "topic": "GIT",
+    "status": "on going"
+  },
+  {
+    "title": "Span",
+    "platform": "Platzi",
+    "url": "https://craigslist.org",
+    "topic": "GIT",
+    "status": "on going"
+  },
+  {
+    "title": "Quo Lux",
+    "platform": "Platzi",
+    "url": "http://nifty.com",
+    "topic": "Databases",
+    "status": "abandoned"
+  },
+  {
+    "title": "Aerified",
+    "platform": "Pluralsight",
+    "url": "https://canalblog.com",
+    "topic": "CSS",
+    "status": "abandoned"
+  },
+  {
+    "title": "Opela",
+    "platform": "Platzi",
+    "url": "https://addthis.com",
+    "topic": "CSS",
+    "status": "abandoned"
+  },
+  {
+    "title": "Biodex",
+    "platform": "Udemy",
+    "url": "https://ehow.com",
+    "topic": "Databases",
+    "status": "finished"
+  },
+  {
+    "title": "Stronghold",
+    "platform": "Platzi",
+    "url": "http://wikimedia.org",
+    "topic": "Backend Programming",
+    "status": "abandoned"
+  }
+]

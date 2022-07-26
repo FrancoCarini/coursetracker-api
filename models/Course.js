@@ -18,7 +18,7 @@ const CourseSchema = new mongoose.Schema(
       type: String,
       enum: [
         'Backend Programming',
-        'FullStack Programming',
+        'Fullstack Programming',
         'Frontend Programming',
         'Databases',
         'HTML',

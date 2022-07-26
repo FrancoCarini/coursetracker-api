@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const mongoose = require('mongoose')
 
 const User = require('../models/User')
 const Course = require('../models/Course')
@@ -73,6 +74,7 @@ const getAllCourses = asyncHandler(async (req, res, next) => {
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
   const total = await Course.countDocuments(JSON.parse(queryStr))
+  const numOfPages = Math.ceil(total / limit)
 
   query = query.skip(startIndex).limit(limit)
 
@@ -81,6 +83,7 @@ const getAllCourses = asyncHandler(async (req, res, next) => {
 
   // Pagination result
   const pagination = {}
+  pagination.numOfPages = numOfPages
   if (endIndex < total) {
     pagination.next = {
       page: page + 1,
@@ -96,17 +99,79 @@ const getAllCourses = asyncHandler(async (req, res, next) => {
   }
 
   res.status(200).json({
-    count: results.length,
+    totalCourses: results.length,
     pagination,
     courses: results,
   })
 })
 
-const deleteCourse = asyncHandler(async (req, res) => {})
+const deleteCourse = asyncHandler(async (req, res, next) => {
+  const course = await Course.findById(req.params.id)
 
-const updateCourse = asyncHandler(async (req, res) => {})
+  // check course existance
+  if (!course) {
+    next(new AppError('Course does not exists', 404))
+  }
 
-const stats = asyncHandler(async (req, res) => {})
+  // Check if belongs to user
+  if (course.user.toString() !== req.user) {
+    next(new AppError('Not Allowed', 405))
+  }
+
+  await course.remove()
+
+  res.sendStatus(200)
+})
+
+const updateCourse = asyncHandler(async (req, res) => {
+  const course = await Course.findById(req.params.id)
+
+  // check course existance
+  if (!course) {
+    next(new AppError('Course does not exists', 404))
+  }
+
+  // Check if belongs to user
+  if (course.user.toString() !== req.user) {
+    next(new AppError('Not Allowed', 405))
+  }
+
+  // Update
+  course = await Course.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+
+  res.status(200).json({
+    course,
+  })
+})
+
+const stats = asyncHandler(async (req, res) => {
+  const courses = await Course.aggregate([
+    {
+      $match: {
+        user: mongoose.Types.ObjectId(req.user),
+      },
+    },
+    {
+      $group: {
+        _id: '$status',
+        count: { $sum: 1 },
+      },
+    },
+  ])
+
+  const stats = courses.reduce((acc, curr) => {
+    const { _id, count } = curr
+    acc[_id] = count
+    return acc
+  }, {})
+
+  res.status(200).json({
+    stats,
+  })
+})
 
 module.exports = {
   createCourse,
